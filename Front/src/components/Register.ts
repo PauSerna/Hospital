@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 import axios from "axios";
@@ -31,7 +31,7 @@ export const useHandleSubmit = (
         }else if (password !== confirmPassword) {
             setError('Las contraseñas no coinciden');
         } 
-        const response = await axios.post("http://localhost:3000/users/register", { "name":username, email, "role_id":1, password }, {
+        const response = await axios.post("http://localhost:3000/users/register", { "name":username, "email":email, "role_id": 2, "password":password }, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization' : 'Bearer ' + localStorage.getItem('token')

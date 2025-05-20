@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useAuthStore } from "../../store/authStore";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import "../../styles/pages/_Profile.scss";
-
+import axios from "axios";
 interface RegisteredUser {
     username: string;
     password: string;
@@ -43,7 +43,7 @@ const Profile: React.FC = () => {
         return true;
     };
 
-    const handleChangePasswordSubmit = (e: React.FormEvent) => {
+    const handleChangePasswordSubmit = async(e: React.FormEvent) => {
         e.preventDefault();
         setError("");
         setSuccessMessage("");
@@ -52,30 +52,35 @@ const Profile: React.FC = () => {
             setError("Las nuevas contraseñas no coinciden.");
             return;
         }
-
         if (!validatePassword(newPassword)) {
             return;
         }
+        const response = await axios.post("http://localhost:3000/users/changepassword", {
+            "user_id":1,
+            "currentPassword": currentPassword,
+            "newPassword": newPassword
+        });
+        console.log(response);
 
-        const storedUsers: RegisteredUser[] = JSON.parse(localStorage.getItem("registeredUsers") || "[]");
+        // const storedUsers: RegisteredUser[] = JSON.parse(localStorage.getItem("registeredUsers") || "[]");
 
-        const currentUserData = storedUsers.find((u) => u.username === currentUser?.username);
+        // const currentUserData = storedUsers.find((u) => u.username === currentUser?.username);
 
-        if (!currentUserData) {
-            setError("El usuario no existe o no está autenticado.");
-            return;
-        }
+        // if (!currentUserData) {
+        //     setError("El usuario no existe o no está autenticado.");
+        //     return;
+        // }
 
-        if (currentUserData.password !== currentPassword) {
-            setError("La contraseña actual es incorrecta.");
-            return;
-        }
+        // if (currentUserData.password !== currentPassword) {
+        //     setError("La contraseña actual es incorrecta.");
+        //     return;
+        // }
 
-        const updatedUsers = storedUsers.map((u) =>
-            u.username === currentUser?.username ? { ...u, password: newPassword } : u
-        );
+        // const updatedUsers = storedUsers.map((u) =>
+        //     u.username === currentUser?.username ? { ...u, password: newPassword } : u
+        // );
 
-        localStorage.setItem("registeredUsers", JSON.stringify(updatedUsers));
+        // localStorage.setItem("registeredUsers", JSON.stringify(updatedUsers));
 
         setSuccessMessage(`Contraseña actualizada exitosamente para el usuario ${currentUser?.username}.`);
         setCurrentPassword("");

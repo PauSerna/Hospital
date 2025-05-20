@@ -11,7 +11,6 @@ const Register: React.FC = () => {
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
     const [error, setError] = useState<string>('');
-
     const { showPassword } = usePasswordToggle();
     const { role, handleRoleChange } = useRoleChange('');
 

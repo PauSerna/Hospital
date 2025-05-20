@@ -22,8 +22,8 @@ const Login: React.FC = () => {
         event.preventDefault();
         setError("");
         const response = await axios.post("http://localhost:3000/auth/login", {
-            "email":username,
-            "password":password
+            "email": username,
+            "password": password
         });
         console.log(response);
                 if (response.status===201){
