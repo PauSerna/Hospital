@@ -1,0 +1,116 @@
+@use '/src/styles/variables' as *;
+
+
+
+
+.register-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    margin-left: 50px;
+    height: 100vh;
+    background-color: $primary-color;
+}
+
+.register-img {    
+    height: auto;
+    display: flex;
+    margin-left: 8rem;
+}
+
+.register-title{
+    font-size: 2.5rem;
+    margin-bottom : 2rem;
+    color: black;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(109, 104, 104, 0.089);
+    padding: 4.5rem;
+    height: 30rem;
+    width: 30rem;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+}
+
+.register-password,
+.register-username,
+.register-email,
+.register-role {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 0.2rem;
+    width: 100%;
+    color: black;
+
+    .show-password-button{
+        border-radius: 4px;
+        padding: 5px 10px;
+        margin-top: 5px;
+        border: 1px solid black;
+        color: $primary-color;
+        background-color: $secondary-color;
+    }
+}
+
+.register-label-password-confirm,
+.register-label-password,
+.register-label-username,
+.register-label-email,
+.register-label-role{
+    margin-top: 10px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: left;
+    color: black;
+}
+
+.register-input-password-confirm,
+.register-input-password,
+.register-input-username,
+.register-input-email {
+    width: 100%;
+    padding: 8px 0.5rem;
+    border-radius: 4px;
+    color: black;
+    border: 0.5px solid black;
+    background-color: $primary-color;
+}
+
+.register-div-role{
+    flex-direction: row;
+    
+}
+
+
+.register-button,
+.cancel-button {
+    width: 100%;
+    font-size: 15px;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    color: $primary-color;
+    cursor: pointer;
+    background-color: $secondary-color;
+}
+
+.register-button{
+    margin-top: 0rem;
+}
+.cancel-button{
+    margin-bottom: 3rem;
+}
+
+.show-password-button:hover,
+.register-button:hover,
+.cancel-button:hover {
+    background-color: $sexturay-color;
+}

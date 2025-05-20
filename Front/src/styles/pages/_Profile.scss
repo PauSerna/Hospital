@@ -1,0 +1,128 @@
+// src/styles/pages/_Profile.scss
+
+@use '/src/styles/_variables.scss' as *;
+@use 'sass:color';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+// Definir la familia de fuentes para todo el dashboard
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+
+.profile-layout {
+    font-family: $font-family;
+    display: flex;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f9fafc 0%, #f1f5f9 100%);
+
+    .profile-content {
+        flex: 1;
+        padding: 2.2rem 2.8rem;
+        margin-left: 260px;
+        transition: margin 0.3s;
+    
+        @media (max-width: 992px) {
+            margin-left: 0;
+            padding: 2rem;
+        }
+    
+        @media (max-width: 576px) {
+            padding: 1.5rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+
+            h1 {
+                color: #1e293b;
+                font-weight: 700;
+                font-size: 2rem;
+                margin: 0;
+                position: relative;
+        
+                &::after {
+                    content: '';
+                    position: absolute;
+                    height: 5px;
+                    width: 40px;
+                    background: linear-gradient(to right, $primary-color, $secondary-color);
+                    bottom: -10px;
+                    left: 0;
+                    border-radius: 10px;
+                }
+            }
+        }
+        
+
+        .profile-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+
+            button {
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #0056b3;
+                }
+            }
+        }
+
+.update-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover {
+        background-color: #0056b3;
+    }
+}
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        
+            @media (max-width: 576px) {
+                gap: 1.2rem;
+                margin-bottom: 2rem;
+            }
+        }
+        
+
+        .change-password-form {
+            label {
+                display: block;
+                margin-top: 10px;
+            }
+
+            input {
+                width: 100%;
+                padding: 8px;
+                margin-top: 5px;
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            .error-message {
+                color: red;
+                margin-bottom: 10px;
+            }
+
+            .success-message {
+                color: green;
+                margin-bottom: 10px;
+            }
+        }
+    }
+}
