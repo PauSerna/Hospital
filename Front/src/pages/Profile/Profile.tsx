@@ -3,6 +3,7 @@ import { useAuthStore } from "../../store/authStore";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import "../../styles/pages/_Profile.scss";
 import axios from "axios";
+import { set } from "react-hook-form";
 interface RegisteredUser {
     username: string;
     password: string;
@@ -53,40 +54,30 @@ const Profile: React.FC = () => {
             return;
         }
         if (!validatePassword(newPassword)) {
+            setError("La nueva contraseña no cumple con los requisitos.");
             return;
         }
+        const token = localStorage.getItem("token");
         const response = await axios.post("http://localhost:3000/users/changepassword", {
             "user_id":1,
             "currentPassword": currentPassword,
             "newPassword": newPassword
+        }, {    
+            headers:{ 
+            'Authorization': `Bearer ${token}`
+            }
         });
         console.log(response);
 
-        // const storedUsers: RegisteredUser[] = JSON.parse(localStorage.getItem("registeredUsers") || "[]");
-
-        // const currentUserData = storedUsers.find((u) => u.username === currentUser?.username);
-
-        // if (!currentUserData) {
-        //     setError("El usuario no existe o no está autenticado.");
-        //     return;
-        // }
-
-        // if (currentUserData.password !== currentPassword) {
-        //     setError("La contraseña actual es incorrecta.");
-        //     return;
-        // }
-
-        // const updatedUsers = storedUsers.map((u) =>
-        //     u.username === currentUser?.username ? { ...u, password: newPassword } : u
-        // );
-
-        // localStorage.setItem("registeredUsers", JSON.stringify(updatedUsers));
-
-        setSuccessMessage(`Contraseña actualizada exitosamente para el usuario ${currentUser?.username}.`);
+        if (response.data.success){
+        setSuccessMessage(`Contraseña actualizada exitosamente para el usuario`);
         setCurrentPassword("");
         setNewPassword("");
         setConfirmNewPassword("");
         setShowChangePasswordForm(false);
+        }else{
+            setError(response.data.message || "No se cambio la contraseña");
+        }
     };
 
     return (
